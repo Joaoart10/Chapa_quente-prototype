@@ -1,0 +1,50 @@
+ESTRUTURA DO PROJETO
+====================
+  index.html + site.css + site.js   site institucional da loja (início)
+  pedido.html + style.css + script.js   cardápio digital e pedido ("Fazer pedido")
+  config.js                          WhatsApp, senha do admin e taxa de entrega
+  img/ e fonts/                      fotos, logo e fontes
+
+Dados fictícios do site para você trocar no index.html: horário e endereço (seção "Contato").
+A imagem do celular (img/app-pedido.jpg) é uma captura do cardápio.
+
+FOTOS E CONFIGURAÇÃO
+====================
+
+FOTOS (pasta img/)
+Nomes usados pelo cardápio (formatos: .png, .jpg, .jpeg ou .webp):
+  classico, cheddar, barbecue, duplo_quente, especial, veggie-grill,
+  batata, aneis-de-cebola, refrigerante, suco-natural, brownie, milkshake
+Item sem foto usa img/padrao.svg (chama sobre fundo listrado).
+Itens cadastrados no modo administrador guardam a foto no próprio navegador.
+
+CONFIGURAÇÃO (arquivo config.js, na raiz do projeto)
+  WHATSAPP_LOJA  número da loja: só dígitos, com 55 + DDD + número (ex.: 5511987654321)
+  SENHA_ADMIN    senha do modo administrador (padrão: 1234 — troque!)
+  TAXA_ENTREGA   taxa de entrega
+
+AVISOS
+- O pedido abre o WhatsApp da loja com a mensagem pronta; o cliente precisa tocar em
+  "enviar". Envio 100% automático exige um servidor ou a API oficial do WhatsApp.
+- O modo administrador roda só no navegador: a senha fica visível no código e os itens
+  cadastrados ficam salvos apenas no aparelho onde foram criados. Para uso real, o
+  cardápio precisa vir de um servidor com login de verdade.
+
+PAGAMENTO DE TESTE
+- "Ir para o pagamento" abre uma tela simulada: Pix (QR de demonstração), cartão ou dinheiro.
+- Nada é cobrado, enviado nem salvo. O pedido só segue para o WhatsApp depois do "pagamento".
+- Cartão de teste: 4242 4242 4242 4242, validade futura, CVV 123.
+  4000 0000 0000 0002 simula pagamento recusado.
+- Para cobrar de verdade seria preciso integrar um provedor de pagamento (Mercado Pago, Stripe,
+  Pix de um banco etc.) com um servidor. Isso não dá para fazer só com HTML/CSS/JS.
+
+TRANSIÇÃO DE PÁGINA
+- transicao.css e transicao.js fazem a animação entre o site e o cardápio (tela cor de brasa com a chama).
+- Quem usa "reduzir movimento" no sistema vai direto, sem animação.
+
+PEDIDO NO ESTILO QUIOSQUE (pedido.html)
+- Menu de categorias na lateral (faixa no celular), produtos em grade e aviso "Adicionado à sacola".
+- Fluxo: Sacola (ver itens) -> Conferir pedido (entrega/retirada e dados) -> Pagamento -> Enviar pelo WhatsApp.
+- "Pedidos" (topo): histórico salvo no navegador (localStorage), com "Pedir de novo" e "Reenviar no WhatsApp".
+  Fica no aparelho/navegador onde o pedido foi feito; limpar os dados do navegador apaga o histórico.
+  Guarda nome e endereço do pedido; o cartão de teste nunca é salvo.

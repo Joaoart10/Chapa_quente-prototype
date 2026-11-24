@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapa Quente | Hamburgueria artesanal</title>
+  <meta name="description" content="Chapa Quente, hamburgueria artesanal: blend de 150g, pão brioche e tudo feito na chapa. Conheça os destaques do cardápio e faça seu pedido online.">
+  <meta name="theme-color" content="#1B130E">
+  <link rel="preload" href="fonts/big-shoulders-display-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="site.css?v=2">
+  <script>try{var d=sessionStorage.getItem("cq-transicao");if(d&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("entrando");document.documentElement.dataset.destino=d}}catch(e){}</script>
+  <link rel="stylesheet" href="transicao.css?v=2">
+</head>
+<body>
+  <div class="transicao" id="transicao" aria-hidden="true">
+    <div class="transicao__in">
+      <svg class="transicao__chama" viewBox="0 0 24 28" aria-hidden="true">
+        <path d="M12 1c1 5 7 8 7 15a7 7 0 0 1-14 0c0-3 1.5-5 3-6.5.2 2 1.2 3 2.2 3.5C10 9 10.5 5 12 1z" fill="#1B130E"/>
+        <path d="M12 14c.6 2.5 3.5 3.5 3.5 6.5a3.5 3.5 0 0 1-7 0c0-1.8.8-2.8 1.8-3.8.2 1 .8 1.5 1.2 1.7-.3-1.8 0-3 .5-4.4z" fill="#F4E3B8"/>
+      </svg>
+      <p class="transicao__marca">Chapa Quente</p>
+      <p class="transicao__msg transicao__msg--pedido">Esquentando a chapa…</p>
+      <p class="transicao__msg transicao__msg--site">Voltando ao site…</p>
+      <span class="transicao__barra"><span></span></span>
+    </div>
+  </div>
+  <a class="pular" href="#principal">Pular para o conteúdo</a>
+
+  <div class="aviso-topo">
+    <p>Peça online: <strong>retire no balcão</strong> ou <strong>receba em casa</strong>.</p>
+  </div>
+
+  <header class="topo">
+    <div class="topo__in">
+      <a class="marca" href="#inicio" aria-label="Chapa Quente, início">
+        <img src="img/logo.png" alt="Chapa Quente Hamburgueria" width="368" height="276">
+      </a>
+
+      <nav class="menu" id="menu" aria-label="Principal">
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#destaques">Cardápio</a></li>
+          <li><a href="#como-pedir">Como pedir</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="topo__acoes">
+        <a class="btn btn--brasa" href="pedido.html">Fazer pedido</a>
+        <button type="button" class="hamb" id="hamb" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="principal">
+    <!-- ===== Destaques (carrossel) ===== -->
+    <section class="hero" id="inicio" aria-roledescription="carrossel" aria-label="Destaques da Chapa Quente">
+      <div class="hero__slides" id="slides" aria-live="off">
+
+        <article class="slide slide--1 ativo" aria-roledescription="slide" aria-label="1 de 3">
+          <div class="slide__texto">
+            <span class="selo">Fome braba</span>
+            <h1 class="slide__titulo">Sabor de verdade, <em>na chapa.</em></h1>
+            <p>Dois blends de 150g, queijo em dobro e muito cheddar derretido. O Duplo Quente é para quem chegou com fome.</p>
+            <div class="slide__botoes">
+              <a class="btn btn--brasa btn--grande" href="pedido.html#item-4">Fazer pedido</a>
+              <a class="btn btn--contorno btn--grande" href="#destaques">Ver cardápio</a>
+            </div>
+          </div>
+          <div class="slide__foto">
+            <img src="img/duplo_quente.png" alt="Hambúrguer Duplo Quente, com dois blends e cheddar derretido" width="261" height="274">
+          </div>
+        </article>
+
+        <article class="slide slide--2" aria-roledescription="slide" aria-label="2 de 3">
+          <div class="slide__texto">
+            <span class="selo">Chef indica</span>
+            <h2 class="slide__titulo">O queridinho <em>da casa.</em></h2>
+            <p>Blend de 150g, bacon crocante, ovo, cheddar e o molho especial da casa. Um burger completo do começo ao fim.</p>
+            <div class="slide__botoes">
+              <a class="btn btn--brasa btn--grande" href="pedido.html#item-5">Fazer pedido</a>
+              <a class="btn btn--contorno btn--grande" href="#destaques">Ver cardápio</a>
+            </div>
+          </div>
+          <div class="slide__foto">
+            <img src="img/especial.png" alt="Hambúrguer Especial da Casa, com bacon, ovo e cheddar" width="288" height="244">
+          </div>
+        </article>
+
+        <article class="slide slide--3" aria-roledescription="slide" aria-label="3 de 3">
+          <div class="slide__texto">
+            <span class="selo">Mais pedido</span>
+            <h2 class="slide__titulo">Bacon, cheddar <em>e brasa.</em></h2>
+            <p>O Cheddar Bacon junta blend suculento, bacon crocante e cheddar derretido. Fácil entender por que é um dos mais pedidos.</p>
+            <div class="slide__botoes">
+              <a class="btn btn--brasa btn--grande" href="pedido.html#item-2">Fazer pedido</a>
+              <a class="btn btn--contorno btn--grande" href="#destaques">Ver cardápio</a>
+            </div>
+          </div>
+          <div class="slide__foto">
+            <img src="img/cheddar.png" alt="Hambúrguer Cheddar Bacon, com bacon crocante e cheddar derretido" width="261" height="274">
+          </div>
+        </article>
+      </div>
+
+      <button type="button" class="seta seta--ant" id="ant" aria-label="Destaque anterior">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 4l-8 8 8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="seta seta--prox" id="prox" aria-label="Próximo destaque">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <div class="hero__ctrl">
+        <div class="dots" id="dots">
+          <button type="button" class="dot" aria-label="Ir para o destaque 1" aria-current="true"></button>
+          <button type="button" class="dot" aria-label="Ir para o destaque 2" aria-current="false"></button>
+          <button type="button" class="dot" aria-label="Ir para o destaque 3" aria-current="false"></button>
+        </div>
+        <button type="button" class="pausa" id="pausa" aria-label="Pausar a troca automática">
+          <svg class="pausa__ico pausa__ico--pausar" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 5h3.500v14H7zM13.500 5H17v14h-3.500z" fill="currentColor"/></svg>
+          <svg class="pausa__ico pausa__ico--tocar" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== Cardápio em destaque ===== -->
+    <section class="secao secao--creme" id="destaques" aria-labelledby="t-destaques">
+      <div class="cont">
+        <p class="sobretitulo">Cardápio</p>
+        <h2 class="secao__titulo" id="t-destaques">O cardápio da chapa</h2>
+        <p class="secao__intro">Hambúrgueres, porções, bebidas e sobremesas, tudo feito na hora. Escolha o seu e peça pelo site.</p>
+
+        <ul class="cards">
+          <li class="card" data-id="1">
+            <div class="card__foto">
+              <img src="img/classico.png" alt="Hambúrguer Clássico da Chapa, com cheddar, alface e tomate" width="248" height="276" loading="lazy">
+              <span class="card__tag">Mais pedido</span>
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Clássico da Chapa</h3>
+              <p class="card__desc">Pão brioche, blend de 150g, queijo cheddar, alface e tomate.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 24,90</span>
+                <a class="btn btn--laranja" href="pedido.html#item-1" aria-label="Pedir Clássico da Chapa">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="2">
+            <div class="card__foto">
+              <img src="img/cheddar.png" alt="Hambúrguer Cheddar Bacon, com bacon crocante e cheddar" width="261" height="274" loading="lazy">
+              <span class="card__tag">Mais pedido</span>
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Cheddar Bacon</h3>
+              <p class="card__desc">Blend de 150g, bacon crocante, cheddar derretido e molho da casa.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 29,90</span>
+                <a class="btn btn--laranja" href="pedido.html#item-2" aria-label="Pedir Cheddar Bacon">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="3">
+            <div class="card__foto">
+              <img src="img/barbecue.png" alt="Hambúrguer Barbecue, com bacon, cebola crispy e molho barbecue" width="285" height="245" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Barbecue</h3>
+              <p class="card__desc">Blend de 150g, bacon, cebola crispy, cheddar e molho barbecue.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 31,90</span>
+                <a class="btn btn--laranja" href="pedido.html#item-3" aria-label="Pedir Barbecue">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="4">
+            <div class="card__foto">
+              <img src="img/duplo_quente.png" alt="Hambúrguer Duplo Quente, com dois blends e cheddar em dobro" width="251" height="267" loading="lazy">
+              <span class="card__tag">Fome braba</span>
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Duplo Quente</h3>
+              <p class="card__desc">Dois blends de 150g, queijo em dobro e muito cheddar derretido.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 34,90</span>
+                <a class="btn btn--laranja" href="pedido.html#item-4" aria-label="Pedir Duplo Quente">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="5">
+            <div class="card__foto">
+              <img src="img/especial.png" alt="Hambúrguer Especial da Casa, com bacon, ovo e cheddar" width="288" height="244" loading="lazy">
+              <span class="card__tag">Chef indica</span>
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Especial da Casa</h3>
+              <p class="card__desc">Blend de 150g, bacon, ovo, cheddar e molho especial da casa.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 36,90</span>
+                <a class="btn btn--laranja" href="pedido.html#item-5" aria-label="Pedir Especial da Casa">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="6">
+            <div class="card__foto">
+              <img src="img/veggie.png" alt="Hambúrguer Veggie Grill, com queijo, alface e tomate" width="380" height="365" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Veggie Grill</h3>
+              <p class="card__desc">Hambúrguer de grão-de-bico, rúcula, tomate seco e maionese verde.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 27,90</span>
+                <a class="btn btn--laranja" href="pedido.html#item-6" aria-label="Pedir Veggie Grill">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="7">
+            <div class="card__foto">
+              <img src="img/batata.png" alt="Porção de batata frita crocante na embalagem da Chapa Quente" width="252" height="237" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Batata Frita</h3>
+              <p class="card__desc">Porção crocante com sal e orégano. Combina com qualquer burger.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 16,00</span>
+                <a class="btn btn--laranja" href="pedido.html#item-7" aria-label="Pedir Batata Frita">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="8">
+            <div class="card__foto">
+              <img src="img/aneis.png" alt="Porção de anéis de cebola empanados" width="380" height="365" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Anéis de Cebola</h3>
+              <p class="card__desc">Cebola empanada com molho barbecue.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 18,00</span>
+                <a class="btn btn--laranja" href="pedido.html#item-8" aria-label="Pedir Anéis de Cebola">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="9">
+            <div class="card__foto card__foto--contain">
+              <img src="img/refrigerante.png" alt="Refrigerante em lata" width="108" height="219" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Refrigerante Lata</h3>
+              <p class="card__desc">Cola, guaraná ou limão. 350ml.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 6,00</span>
+                <a class="btn btn--laranja" href="pedido.html#item-9" aria-label="Pedir Refrigerante Lata">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="10">
+            <div class="card__foto">
+              <img src="img/suco.png" alt="Copo de suco natural" width="383" height="396" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Suco Natural</h3>
+              <p class="card__desc">Laranja ou limão, feito na hora. 400ml.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 9,00</span>
+                <a class="btn btn--laranja" href="pedido.html#item-10" aria-label="Pedir Suco Natural">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="11">
+            <div class="card__foto">
+              <img src="img/brownie.png" alt="Brownie quentinho com sorvete de creme" width="418" height="389" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Brownie com Sorvete</h3>
+              <p class="card__desc">Brownie quentinho com uma bola de sorvete de creme.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 17,00</span>
+                <a class="btn btn--laranja" href="pedido.html#item-11" aria-label="Pedir Brownie com Sorvete">Pedir</a>
+              </div>
+            </div>
+          </li>
+          <li class="card" data-id="12">
+            <div class="card__foto">
+              <img src="img/milk.png" alt="Milkshake de chocolate com chantilly" width="341" height="392" loading="lazy">
+            </div>
+            <div class="card__corpo">
+              <h3 class="card__nome">Milkshake</h3>
+              <p class="card__desc">Chocolate, morango ou baunilha. 400ml.</p>
+              <div class="card__rodape">
+                <span class="card__preco" data-preco>R$ 19,00</span>
+                <a class="btn btn--laranja" href="pedido.html#item-12" aria-label="Pedir Milkshake">Pedir</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <p class="secao__cta"><a class="btn btn--brasa btn--grande" href="pedido.html">Ver cardápio completo e fazer pedido</a></p>
+      </div>
+    </section>
+
+    <!-- ===== Como pedir ===== -->
+    <section class="secao secao--escura" id="como-pedir" aria-labelledby="t-pedir">
+      <div class="cont">
+        <p class="sobretitulo sobretitulo--claro">Passo a passo</p>
+        <h2 class="secao__titulo" id="t-pedir">Pedir é fácil</h2>
+
+        <ol class="passos">
+          <li class="passo">
+            <span class="passo__n" aria-hidden="true">1</span>
+            <h3 class="passo__titulo">Escolha seus lanches</h3>
+            <p>Navegue pelas categorias do cardápio e toque em <strong>Adicionar</strong> nos itens que quiser.</p>
+          </li>
+          <li class="passo">
+            <span class="passo__n" aria-hidden="true">2</span>
+            <h3 class="passo__titulo">Confira a sacola</h3>
+            <p>Revise os itens, escolha entre <strong>retirar no balcão</strong> ou <strong>entrega</strong> e informe seus dados.</p>
+          </li>
+          <li class="passo">
+            <span class="passo__n" aria-hidden="true">3</span>
+            <h3 class="passo__titulo">Pague e envie</h3>
+            <p>Escolha a forma de pagamento e envie o pedido para a loja pelo <strong>WhatsApp</strong>.</p>
+          </li>
+        </ol>
+
+      </div>
+    </section>
+
+    <!-- ===== Sobre ===== -->
+    <section class="secao secao--creme" id="sobre" aria-labelledby="t-sobre">
+      <div class="cont sobre">
+        <div class="sobre__texto">
+          <p class="sobretitulo">Sobre a Chapa Quente</p>
+          <h2 class="secao__titulo" id="t-sobre">Hambúrguer feito do jeito certo</h2>
+          <p>Na Chapa Quente, o hambúrguer é grelhado na hora, na chapa, para manter o suco do blend e a crosta bem dourada. O pão brioche é tostado antes de receber o queijo derretido e os ingredientes frescos.</p>
+          <p>Cada lanche sai montado do começo ao fim na cozinha, e você escolhe se prefere retirar no balcão ou receber em casa.</p>
+        </div>
+
+        <ul class="sobre__itens">
+          <li><strong>150g</strong><span>de blend em cada burger</span></li>
+          <li><strong>Na hora</strong><span>grelhado na chapa quando você pede</span></li>
+          <li><strong>Brioche</strong><span>pão macio, sempre tostado</span></li>
+          <li><strong>2 jeitos</strong><span>retire no balcão ou receba em casa</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Peça pelo celular ===== -->
+    <section class="secao secao--brasa" aria-labelledby="t-celular">
+      <div class="cont celular-bloco">
+        <div class="celular" aria-hidden="true">
+          <img src="img/app-pedido.jpg" alt="" width="780" height="1500" loading="lazy">
+        </div>
+        <div class="celular-bloco__texto">
+          <h2 class="secao__titulo secao__titulo--grande" id="t-celular">Peça pelo celular. Sem baixar nada.</h2>
+          <p>O cardápio da Chapa Quente funciona direto no navegador. Monte a sacola com poucos toques, confira o pedido e envie para a loja.</p>
+          <a class="btn btn--creme btn--grande" href="pedido.html">Fazer pedido</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contato ===== -->
+    <section class="secao secao--fundo" id="contato" aria-labelledby="t-contato">
+      <div class="cont">
+        <p class="sobretitulo sobretitulo--claro">Contato</p>
+        <h2 class="secao__titulo" id="t-contato">Venha nos visitar</h2>
+
+        <div class="infos">
+          <div class="info">
+            <h3 class="info__titulo">Horário</h3>
+            <p>Terça a domingo<br><strong>18h às 23h</strong></p>
+            <p class="info__nota">Segunda: fechado</p>
+          </div>
+          <div class="info">
+            <h3 class="info__titulo">Onde estamos</h3>
+            <p>Rua da Chapa, 100<br>Centro, São Paulo – SP</p>
+            <p class="info__nota">Retirada no balcão e entrega na região</p>
+          </div>
+          <div class="info">
+            <h3 class="info__titulo">Fale com a gente</h3>
+            <p>Dúvidas, elogios ou pedidos especiais? Chame no WhatsApp.</p>
+            <a class="btn btn--whats" id="whats-contato" data-whats href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <a class="rodape__logo" href="#inicio" aria-label="Chapa Quente, voltar ao início">
+      <img src="img/logo.png" alt="Chapa Quente Hamburgueria" width="368" height="276">
+    </a>
+    <ul class="rodape__links">
+      <li><a href="#destaques">Cardápio</a></li>
+      <li><a href="#como-pedir">Como pedir</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a href="pedido.html">Fazer pedido</a></li>
+    </ul>
+    <p class="rodape__nota">Chapa Quente é uma hamburgueria fictícia, criada como projeto da disciplina de Front End.</p>
+    <p class="rodape__nota">© <span id="ano">2026</span> Chapa Quente. Imagens meramente ilustrativas.</p>
+  </footer>
+
+  <a class="voltar-topo" id="voltar-topo" href="#inicio" hidden>
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 15l7-7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Voltar ao topo
+  </a>
+
+  <script src="config.js?v=6"></script>
+  <script src="transicao.js?v=2"></script>
+  <script src="site.js?v=1"></script>
+</body>
+</html>

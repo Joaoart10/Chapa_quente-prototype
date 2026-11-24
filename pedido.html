@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapa Quente | Cardápio digital</title>
+  <meta name="description" content="Cardápio digital da Chapa Quente. Escolha seus lanches, monte a sacola e envie o pedido pelo celular.">
+  <meta name="theme-color" content="#1B130E">
+  <link rel="preload" href="fonts/big-shoulders-display-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="img/logo.png" as="image">
+  <link rel="stylesheet" href="style.css?v=12">
+  <script>try{var d=sessionStorage.getItem("cq-transicao");if(d&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("entrando");document.documentElement.dataset.destino=d}}catch(e){}</script>
+  <link rel="stylesheet" href="transicao.css?v=2">
+</head>
+<body>
+  <div class="transicao" id="transicao" aria-hidden="true">
+    <div class="transicao__in">
+      <svg class="transicao__chama" viewBox="0 0 24 28" aria-hidden="true">
+        <path d="M12 1c1 5 7 8 7 15a7 7 0 0 1-14 0c0-3 1.5-5 3-6.5.2 2 1.2 3 2.2 3.5C10 9 10.5 5 12 1z" fill="#1B130E"/>
+        <path d="M12 14c.6 2.5 3.5 3.5 3.5 6.5a3.5 3.5 0 0 1-7 0c0-1.8.8-2.8 1.8-3.8.2 1 .8 1.5 1.2 1.7-.3-1.8 0-3 .5-4.4z" fill="#F4E3B8"/>
+      </svg>
+      <p class="transicao__marca">Chapa Quente</p>
+      <p class="transicao__msg transicao__msg--pedido">Esquentando a chapa…</p>
+      <p class="transicao__msg transicao__msg--site">Voltando ao site…</p>
+      <span class="transicao__barra"><span></span></span>
+    </div>
+  </div>
+  <a class="pular" href="#cardapio">Pular para o cardápio</a>
+
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="Chapa Quente, voltar ao site">
+      <img class="marca__logo" src="img/logo.png" alt="Chapa Quente Hamburgueria" width="368" height="276">
+    </a>
+
+    <div class="topo__botoes">
+      <button type="button" class="topo__comanda" id="abrir-historico" aria-label="Meus pedidos">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z M9.500 8h5 M9.500 12h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <span class="topo__rotulo">Pedidos</span>
+        <span class="topo__contador topo__contador--claro" id="contador-pedidos" hidden>0</span>
+      </button>
+      <button type="button" class="topo__comanda" id="abrir-topo" aria-controls="comanda" aria-expanded="false" aria-label="Minha sacola">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 8h12l-1 12H7z M9 8a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <span class="topo__rotulo">Sacola</span>
+        <span class="topo__contador" id="contador">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <div class="abas-barra">
+      <nav class="abas" id="abas" aria-label="Categorias do cardápio"></nav>
+    </div>
+
+    <main class="cardapio" id="cardapio" tabindex="-1">
+      <div class="folha" id="folha"></div>
+    </main>
+
+    <div class="fundo" id="fundo" hidden></div>
+
+    <aside class="comanda" id="comanda" aria-labelledby="comanda-titulo">
+      <div class="comanda__topo">
+        <button type="button" class="link link--claro" id="fechar-comanda">Fechar</button>
+      </div>
+
+      <div class="ticket">
+        <header class="ticket__cab">
+          <h2 class="ticket__titulo" id="comanda-titulo" tabindex="-1">Sua sacola</h2>
+          <span class="ticket__numero" id="numero">nº 0427</span>
+        </header>
+
+        <p class="ticket__vazio" id="vazio">Sua sacola está vazia. Toque em Adicionar em qualquer item do cardápio para começar.</p>
+
+        <ul class="ticket__itens" id="itens"></ul>
+
+        <div class="ticket__resumo" id="resumo" hidden>
+          <dl class="contas contas--sacola">
+            <div class="contas__linha contas__linha--sub"><dt>Subtotal</dt><dd id="subtotal-sacola">R$ 0,00</dd></div>
+          </dl>
+          <p class="ticket__dica">Entrega e forma de pagamento você escolhe nos próximos passos.</p>
+          <button type="button" class="btn btn--cheio" id="conferir-abrir">Conferir pedido</button>
+          <button type="button" class="link" id="limpar">Limpar sacola</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" aria-hidden="true" hidden>
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.500l4.500 4.500L19 7.500" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span></span>
+  </div>
+
+  <div class="barra" id="barra" hidden>
+    <button type="button" class="barra__btn" id="abrir-barra" aria-controls="comanda" aria-expanded="false">
+      <span id="barra-qtd">0 itens</span>
+      <span class="barra__ver">Ver sacola</span>
+      <span class="barra__total" id="barra-total">R$ 0,00</span>
+    </button>
+  </div>
+
+  <dialog class="confirma" id="confirmacao" aria-labelledby="confirma-titulo">
+    <h2 class="confirma__titulo" id="confirma-titulo">Pedido realizado com sucesso!</h2>
+    <p class="confirma__texto" id="confirma-texto"></p>
+    <a class="btn btn--cheio btn--whats" id="confirma-whats" href="#" target="_blank" rel="noopener">Enviar pedido pelo WhatsApp</a>
+    <button type="button" class="link" id="confirma-historico">Ver meus pedidos</button>
+    <button type="button" class="link" id="fechar-confirmacao">Voltar ao cardápio</button>
+  </dialog>
+
+  <!-- Etapa 2: conferir o pedido -->
+  <dialog class="pagamento conferir" id="conferir" aria-labelledby="conf-titulo">
+    <div class="pag__cab">
+      <h2 class="pag__titulo" id="conf-titulo">Conferir pedido</h2>
+      <button type="button" class="link" id="conf-fechar">Voltar</button>
+    </div>
+
+    <h3 class="conf__sub">Itens da sacola</h3>
+    <ul class="conf__itens" id="conf-itens"></ul>
+
+    <fieldset class="modo">
+      <legend class="modo__legenda">Como você quer receber?</legend>
+      <label class="modo__op">
+        <input type="radio" name="modo" value="retirada" checked>
+        <span class="modo__cartao">Retirar no balcão<small>Grátis</small></span>
+      </label>
+      <label class="modo__op">
+        <input type="radio" name="modo" value="entrega">
+        <span class="modo__cartao">Entrega<small>+ R$ 5,00</small></span>
+      </label>
+    </fieldset>
+
+    <dl class="contas">
+      <div class="contas__linha"><dt>Subtotal</dt><dd id="subtotal">R$ 0,00</dd></div>
+      <div class="contas__linha"><dt>Entrega</dt><dd id="entrega">Grátis</dd></div>
+      <div class="contas__linha contas__linha--total"><dt>Total</dt><dd id="total">R$ 0,00</dd></div>
+    </dl>
+
+    <div class="campo">
+      <label for="nome">Seu nome</label>
+      <input type="text" id="nome" autocomplete="given-name" placeholder="Como devemos te chamar?" aria-describedby="erro-nome">
+      <p class="campo__erro" id="erro-nome" hidden>Digite seu nome para enviar o pedido.</p>
+    </div>
+
+    <div id="campo-endereco" hidden>
+      <div class="campo">
+        <label for="endereco">Rua e bairro</label>
+        <input type="text" id="endereco" autocomplete="address-line1" placeholder="Ex.: Rua das Flores, Centro" aria-describedby="erro-endereco">
+        <p class="campo__erro" id="erro-endereco" hidden>Digite a rua e o bairro para a entrega.</p>
+      </div>
+      <div class="campo-duplo">
+        <div class="campo">
+          <label for="end-numero">Número</label>
+          <input type="text" id="end-numero" autocomplete="off" placeholder="Ex.: 123" aria-describedby="erro-end-numero">
+          <p class="campo__erro" id="erro-end-numero" hidden>Digite o número (ou S/N).</p>
+        </div>
+        <div class="campo">
+          <label for="end-complemento">Complemento <span class="campo__opc">(opcional)</span></label>
+          <input type="text" id="end-complemento" autocomplete="address-line2" placeholder="Apto, bloco, casa...">
+        </div>
+      </div>
+      <div class="campo">
+        <label for="end-referencia">Ponto de referência <span class="campo__opc">(opcional)</span></label>
+        <input type="text" id="end-referencia" autocomplete="off" placeholder="Ex.: Em frente à padaria">
+      </div>
+    </div>
+
+    <button type="button" class="btn btn--cheio" id="enviar">Ir para o pagamento</button>
+  </dialog>
+
+  <!-- Histórico de pedidos (fica salvo neste aparelho) -->
+  <dialog class="pagamento historico" id="historico" aria-labelledby="hist-titulo">
+    <div class="pag__cab">
+      <h2 class="pag__titulo" id="hist-titulo">Meus pedidos</h2>
+      <button type="button" class="link" id="hist-fechar">Fechar</button>
+    </div>
+    <p class="hist__aviso">Seus pedidos ficam salvos neste aparelho, mesmo depois que você sair do site.</p>
+    <p class="hist__vazio" id="hist-vazio">Você ainda não fez nenhum pedido. Quando fizer, ele aparece aqui.</p>
+    <ol class="hist__lista" id="hist-lista"></ol>
+    <button type="button" class="link" id="hist-limpar" hidden>Limpar histórico</button>
+  </dialog>
+
+  <dialog class="pagamento" id="pagamento" aria-labelledby="pag-titulo">
+    <div class="pag__cab">
+      <h2 class="pag__titulo" id="pag-titulo">Pagamento</h2>
+      <button type="button" class="link" id="pag-fechar">Voltar</button>
+    </div>
+
+    <p class="pag__teste"><strong>Modo teste</strong> Nenhum valor será cobrado e nada digitado aqui é salvo. Não use dados reais de cartão.</p>
+
+    <div class="pag__total">
+      <span>Total do pedido <small id="pag-resumo"></small></span>
+      <strong id="pag-total">R$ 0,00</strong>
+    </div>
+
+    <fieldset class="pag__metodos">
+      <legend>Forma de pagamento</legend>
+      <label class="pag__op">
+        <input type="radio" name="metodo" value="pix" checked>
+        <span class="pag__cartao">Pix<small>Na hora</small></span>
+      </label>
+      <label class="pag__op">
+        <input type="radio" name="metodo" value="cartao">
+        <span class="pag__cartao">Cartão<small>Crédito</small></span>
+      </label>
+      <label class="pag__op">
+        <input type="radio" name="metodo" value="dinheiro">
+        <span class="pag__cartao">Dinheiro<small id="pag-dinheiro-rotulo">Na retirada</small></span>
+      </label>
+    </fieldset>
+
+    <div class="pag__painel pix" id="painel-pix">
+      <div class="pix__qr" id="pix-qr" role="img" aria-label="QR Code de demonstração"></div>
+      <p class="pix__legenda">QR Code de demonstração. Ele não leva a nenhum pagamento real.</p>
+      <div class="pix__copia">
+        <input type="text" id="pix-codigo" readonly aria-label="Código Pix de demonstração">
+        <button type="button" class="btn" id="pix-copiar">Copiar</button>
+      </div>
+      <p class="pag__aviso" id="pix-aviso" role="status"></p>
+    </div>
+
+    <div class="pag__painel" id="painel-cartao" hidden>
+      <div class="cartao-previa" aria-hidden="true">
+        <div class="cartao-previa__topo"><span class="cartao-previa__chip"></span><span>Teste</span></div>
+        <span class="cartao-previa__num" id="prev-num">•••• •••• •••• ••••</span>
+        <div class="cartao-previa__base"><span id="prev-nome">Nome no cartão</span><span id="prev-val">MM/AA</span></div>
+      </div>
+      <div class="campo">
+        <label for="cartao-num">Número do cartão</label>
+        <input type="text" id="cartao-num" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000" aria-describedby="erro-c-num">
+        <p class="campo__erro" id="erro-c-num" hidden>Digite os 16 números do cartão.</p>
+      </div>
+      <div class="campo">
+        <label for="cartao-nome">Nome no cartão</label>
+        <input type="text" id="cartao-nome" autocomplete="off" placeholder="Como está impresso" aria-describedby="erro-c-nome">
+        <p class="campo__erro" id="erro-c-nome" hidden>Digite o nome do cartão.</p>
+      </div>
+      <div class="pag__duas">
+        <div class="campo">
+          <label for="cartao-val">Validade</label>
+          <input type="text" id="cartao-val" inputmode="numeric" autocomplete="off" placeholder="MM/AA" aria-describedby="erro-c-val">
+          <p class="campo__erro" id="erro-c-val" hidden>Validade inválida.</p>
+        </div>
+        <div class="campo">
+          <label for="cartao-cvv">CVV</label>
+          <input type="text" id="cartao-cvv" inputmode="numeric" autocomplete="off" placeholder="000" aria-describedby="erro-c-cvv">
+          <p class="campo__erro" id="erro-c-cvv" hidden>Digite o CVV.</p>
+        </div>
+      </div>
+      <p class="pag__dica">Para testar, use 4242 4242 4242 4242, qualquer validade futura e CVV 123. O número 4000 0000 0000 0002 simula um pagamento recusado.</p>
+    </div>
+
+    <div class="pag__painel" id="painel-dinheiro" hidden>
+      <p class="pag__dinheiro">Você paga em dinheiro <strong id="pag-dinheiro-texto">na retirada</strong>. Se precisar de troco, avise a loja pelo WhatsApp.</p>
+    </div>
+
+    <p class="campo__erro pag__erro" id="erro-pagamento" role="alert" hidden></p>
+    <button type="button" class="btn btn--cheio" id="pagar">Pagar</button>
+  </dialog>
+
+  <dialog class="admin" id="admin" aria-labelledby="admin-titulo">
+    <div class="admin__cab">
+      <h2 class="admin__titulo" id="admin-titulo">Modo administrador</h2>
+      <button type="button" class="link" id="admin-fechar">Fechar</button>
+    </div>
+
+    <form id="admin-login" novalidate>
+      <div class="campo">
+        <label for="admin-senha">Senha do administrador</label>
+        <input type="password" id="admin-senha" autocomplete="current-password" aria-describedby="erro-senha">
+        <p class="campo__erro" id="erro-senha" hidden>Senha incorreta.</p>
+      </div>
+      <button type="submit" class="btn btn--cheio">Entrar</button>
+    </form>
+
+    <div id="admin-painel" hidden>
+      <form id="admin-form" novalidate>
+        <h3 class="admin__sub" id="admin-form-titulo">Novo item</h3>
+        <div class="campo">
+          <label for="admin-nome">Nome do item</label>
+          <input type="text" id="admin-nome" aria-describedby="erro-nome-item">
+          <p class="campo__erro" id="erro-nome-item" hidden>Digite o nome do item.</p>
+        </div>
+        <div class="admin__duas">
+          <div class="campo">
+            <label for="admin-cat">Categoria</label>
+            <select id="admin-cat">
+              <option value="burgers">Burgers</option>
+              <option value="porcoes">Porções</option>
+              <option value="drinks">Drinks</option>
+              <option value="sobremesas">Sobremesas</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="admin-preco">Preço (R$)</label>
+            <input type="number" id="admin-preco" min="0" step="0.01" inputmode="decimal" aria-describedby="erro-preco">
+            <p class="campo__erro" id="erro-preco" hidden>Digite um preço maior que zero.</p>
+          </div>
+        </div>
+        <div class="campo">
+          <label for="admin-desc">Descrição</label>
+          <textarea id="admin-desc" rows="3"></textarea>
+        </div>
+        <div class="campo">
+          <label for="admin-tag">Tag de destaque (opcional)</label>
+          <input type="text" id="admin-tag" placeholder="Ex.: Mais pedido, Fome braba, Chef indica" list="admin-tags">
+          <datalist id="admin-tags"><option value="Mais pedido"><option value="Fome braba"><option value="Chef indica"></datalist>
+        </div>
+        <div class="campo">
+          <label for="admin-foto">Foto (opcional)</label>
+          <input type="file" id="admin-foto" accept="image/*">
+          <img class="admin__previa" id="admin-previa" alt="Prévia da foto escolhida" hidden>
+        </div>
+        <button type="submit" class="btn btn--cheio" id="admin-salvar">Adicionar ao cardápio</button>
+        <button type="button" class="link" id="admin-cancelar" hidden>Cancelar edição</button>
+      </form>
+
+      <p class="admin__aviso" id="admin-aviso" role="status"></p>
+
+      <h3 class="admin__sub">Itens do cardápio</h3>
+      <ul class="admin__lista" id="admin-lista"></ul>
+
+      <button type="button" class="link" id="admin-restaurar">Restaurar cardápio original</button>
+      <button type="button" class="link" id="admin-sair">Sair do modo administrador</button>
+    </div>
+  </dialog>
+
+  <p class="sr" id="aviso" aria-live="polite"></p>
+
+  <footer class="rodape">
+    <p>Chapa Quente é uma hamburgueria fictícia, criada como projeto da disciplina de Front End.</p>
+    <a class="link" href="index.html">← Voltar ao site da Chapa Quente</a>
+    <button type="button" class="link" id="abrir-admin">Área do administrador</button>
+  </footer>
+
+  <script src="config.js?v=6"></script>
+  <script src="transicao.js?v=2"></script>
+  <script src="script.js?v=8"></script>
+</body>
+</html>

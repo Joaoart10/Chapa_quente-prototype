@@ -1,0 +1,124 @@
+/* =========================================================
+   Transição entre páginas (site <-> pedido)
+   ========================================================= */
+.transicao {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 38%, #E8812F 0%, #C8481A 48%, #7A2A0E 100%);
+  transform: translateY(100%);
+  visibility: hidden;
+  pointer-events: none;
+}
+/* listras como as da chapa */
+.transicao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, transparent 0 22px, rgba(27, 19, 14, .07) 22px 44px);
+}
+.transicao__in { position: relative; display: grid; justify-items: center; gap: 6px; color: #fff; text-align: center; padding: 0 24px; }
+
+.transicao__chama { width: 76px; height: 90px; margin-bottom: 6px; transform-origin: 50% 90%; animation: chama .7s ease-in-out infinite; }
+.transicao__marca {
+  font-family: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 9vw, 4rem);
+  line-height: 1;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.transicao__msg { font-family: "Bitter", Georgia, serif; font-size: 1.0625rem; font-weight: 600; }
+.transicao__msg--site { display: none; }
+html[data-destino="site"] .transicao__msg--pedido { display: none; }
+html[data-destino="site"] .transicao__msg--site { display: block; }
+
+.transicao__barra { width: 170px; height: 6px; margin-top: 14px; overflow: hidden; border-radius: 999px; background: rgba(27, 19, 14, .35); }
+.transicao__barra span { display: block; height: 100%; background: #F4E3B8; transform: scaleX(0); transform-origin: left; }
+
+/* fase 1: a tela sobe e cobre a página que está saindo */
+.transicao.cobrindo { visibility: visible; animation: subir .55s cubic-bezier(.77, 0, .18, 1) forwards; }
+.transicao.cobrindo .transicao__barra span { animation: encher .55s linear forwards; }
+
+/* fase 2: a página nova já abre coberta... */
+html.entrando { overflow: hidden; }
+html.entrando .transicao { visibility: visible; transform: none; }
+html.entrando .transicao__barra span { transform: scaleX(1); }
+
+/* fase 3: ...e a tela sobe, revelando o conteúdo */
+html.entrando .transicao.saindo { animation: sair .7s cubic-bezier(.77, 0, .18, 1) forwards; }
+
+@keyframes subir { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes sair { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+@keyframes encher { to { transform: scaleX(1); } }
+@keyframes chama {
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  50% { transform: scale(1.08, 1.14) rotate(2deg); }
+}
+
+/* ---------- botão em carregamento (1 segundo) ---------- */
+.btn.carregando {
+  position: relative;
+  overflow: hidden;
+  color: transparent !important;
+  pointer-events: none;
+}
+/* barra que preenche o botão durante 1 segundo */
+.btn.carregando::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, .24);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: encher 1s linear forwards;
+}
+/* círculo girando no centro */
+.btn.carregando::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 3px solid rgba(255, 255, 255, .4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: girar-btn .7s linear infinite;
+}
+.btn--laranja.carregando::before, .btn--creme.carregando::before { background: rgba(27, 19, 14, .16); }
+.btn--laranja.carregando::after, .btn--creme.carregando::after { border-color: rgba(27, 19, 14, .3); border-top-color: #1B130E; }
+.btn--contorno.carregando::after { border-color: rgba(244, 227, 184, .35); border-top-color: #F4E3B8; }
+.btn--contorno.carregando::before { background: rgba(244, 227, 184, .18); }
+@keyframes girar-btn { to { transform: rotate(360deg); } }
+
+/* ---------- conteúdo entrando depois da transição ---------- */
+@keyframes surgir { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes descer { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+@keyframes crescer { from { opacity: 0; transform: rotate(3deg) scale(.88); } to { opacity: 1; transform: rotate(3deg) scale(1); } }
+
+html.revelando .topo,
+html.revelando .abas-barra { animation: descer .6s .2s both; }
+
+html.revelando .grupo:first-child .item { animation: surgir .6s both; }
+html.revelando .grupo:first-child .item:nth-child(1) { animation-delay: .25s; }
+html.revelando .grupo:first-child .item:nth-child(2) { animation-delay: .33s; }
+html.revelando .grupo:first-child .item:nth-child(3) { animation-delay: .41s; }
+html.revelando .grupo:first-child .item:nth-child(4) { animation-delay: .49s; }
+html.revelando .grupo:first-child .item:nth-child(n+5) { animation-delay: .57s; }
+html.revelando .comanda { animation: surgir .7s .35s both; }
+
+html.revelando .slide.ativo .slide__texto > * { animation: surgir .7s both; }
+html.revelando .slide.ativo .slide__texto > :nth-child(1) { animation-delay: .25s; }
+html.revelando .slide.ativo .slide__texto > :nth-child(2) { animation-delay: .33s; }
+html.revelando .slide.ativo .slide__texto > :nth-child(3) { animation-delay: .41s; }
+html.revelando .slide.ativo .slide__texto > :nth-child(4) { animation-delay: .49s; }
+html.revelando .slide.ativo .slide__foto img { animation: crescer .8s .3s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .transicao { display: none; }
+  html.entrando { overflow: auto; }
+}
